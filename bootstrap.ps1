@@ -18,7 +18,10 @@ param(
     [string]$Repo = 'Kuweko477/autosetup',
 
     # Retelecharge meme si une copie deja installee est presente.
-    [switch]$Force
+    [switch]$Force,
+
+    # Telecharge et prepare sans lancer l'application (utilise par les tests).
+    [switch]$NoLaunch
 )
 
 $ErrorActionPreference = 'Stop'
@@ -145,3 +148,7 @@ Write-Host "    Relancer sans re-telecharger : & '$exePath'" -ForegroundColor Da
 Write-Host ''
 
 Start-Process -FilePath $exePath
+
+if ($NoLaunch) {
+    Write-Ok 'Lancement ignore (-NoLaunch).'
+}

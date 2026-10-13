@@ -1,0 +1,10 @@
+<Configuration>
+  <VGpu>Disable</VGpu>
+  <Networking>Default</Networking>
+
+  <MappedFolders>
+    <MappedFolder>D:\AutoSetup</MappedFolder>
+  </MappedFolders>
+
+  <LogonCommand>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "\\tsclient\D\AutoSetup\sandbox-test.ps1"</LogonCommand>
+</Configuration>

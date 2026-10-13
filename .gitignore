@@ -11,3 +11,6 @@ venv/
 # Spec genere automatiquement par pyinstaller
 # (AutoSetup.spec est versionne a la main, on garde celui-la)
 *.spec.bak
+
+# Rapports produits par le test Windows Sandbox
+sandbox-report-*.txt
