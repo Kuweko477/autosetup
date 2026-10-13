@@ -1,0 +1,4 @@
+# Build deps for AutoSetup.exe  ->  pip install -r requirements.txt
+pyinstaller>=6.10
+PySide6>=6.7
+colorama>=0.4.6

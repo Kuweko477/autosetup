@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build deps
+        run: pip install -r requirements.txt
+
+      - name: Build with PyInstaller
+        run: pyinstaller AutoSetup.spec --noconfirm --clean
+
+      - name: Compute SHA-256 and write manifest
+        shell: pwsh
+        run: |
+          $exe  = 'dist\AutoSetup.exe'
+          $hash = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLower()
+          $size = (Get-Item -LiteralPath $exe).Length
+          [ordered]@{
+            version = "${{ github.ref_name }}"
+            sha256  = $hash
+            size    = $size
+          } | ConvertTo-Json | Set-Content -LiteralPath 'dist\latest.json' -Encoding utf8
+          Write-Host "sha256 = $hash"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/AutoSetup.exe
+            dist/latest.json
+          generate_release_notes: true
+          fail_on_unmatched_files: true

@@ -1,0 +1,13 @@
+# Artefacts de build PyInstaller
+build/
+dist/
+__pycache__/
+*.pyc
+
+# Venv
+.venv/
+venv/
+
+# Spec genere automatiquement par pyinstaller
+# (AutoSetup.spec est versionne a la main, on garde celui-la)
+*.spec.bak
