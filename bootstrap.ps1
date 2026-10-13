@@ -15,7 +15,7 @@
 [CmdletBinding()]
 param(
     # Seul parametre a modifier en general.
-    [string]$Repo = 'TON-NOM/AutoSetup',
+    [string]$Repo = 'Kuweko477/autosetup',
 
     # Retelecharge meme si une copie deja installee est presente.
     [switch]$Force
